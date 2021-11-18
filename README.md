@@ -5,7 +5,7 @@ Ali Ellithi 900183388
 Andrew Sinout 900182668
 
 
-To run this code you need to change the paths and of the input file. 
+To run this code you need to change the names and the paths of the input files (spm.floorplan.def) and (spm.synthesis.v). 
 You need to modify the following numbers in the code:
 
 scale_unit = 1000.0
