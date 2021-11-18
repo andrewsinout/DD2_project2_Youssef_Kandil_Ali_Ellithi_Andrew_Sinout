@@ -233,7 +233,7 @@ def get_pins(peremeter, die_width, die_height):
         if((side_one==True)):
             if((step_x <= die_width)):
                 pin_string+="met2"+" ( -140 -2000 ) ( 140 2000 ) ;\n"
-                pin_string+="\t\t\t+ PLACED ( "+str(step_x)+" "+str(step_y)+" ) N ;\n"
+                pin_string+="\t\t\t+ PLACED ( "+str(int(step_x))+" "+str(int(step_y))+" ) N ;\n"
                 step_x+=seperation
             else:
                 step_x=0.0 
@@ -242,7 +242,7 @@ def get_pins(peremeter, die_width, die_height):
         elif(side_two==True):
             if((step_y <= die_height)):
                 pin_string+="met3"+" ( -140 -2000 ) ( 140 2000 ) ;\n"
-                pin_string+="\t\t\t+ PLACED ( "+str(step_x)+" "+str(step_y)+" ) N ;\n"
+                pin_string+="\t\t\t+ PLACED ( "+str(int(step_x))+" "+str(int(step_y))+" ) N ;\n"
                 step_y+=seperation
             else:
                 side_one=False
@@ -251,7 +251,7 @@ def get_pins(peremeter, die_width, die_height):
         elif(side_three==True):
             if((step_x <= die_width)):
                 pin_string+="met2"+" ( -140 -2000 ) ( 140 2000 ) ;\n"
-                pin_string+="\t\t\t+ PLACED ( "+str(step_x)+" "+str(step_y)+" ) N ;\n"
+                pin_string+="\t\t\t+ PLACED ( "+str(int(step_x))+" "+str(int(step_y))+" ) N ;\n"
                 step_x+=seperation
             else:
                 step_y=0.0 
@@ -262,7 +262,7 @@ def get_pins(peremeter, die_width, die_height):
         elif(side_four==True):
             if((step_y <= die_height)):
                 pin_string+="met3"+" ( -140 -2000 ) ( 140 2000 ) ;\n"
-                pin_string+="\t\t\t+ PLACED ( "+str(step_x)+" "+str(step_y)+" ) N ;\n"
+                pin_string+="\t\t\t+ PLACED ( "+str(int(step_x))+" "+str(int(step_y))+" ) N ;\n"
                 step_y+=seperation
             else:
                 step_y=0.0 
@@ -398,12 +398,12 @@ def get_rows():
 
     for row in range (no_of_rows):
 
-        row_string= "ROW ROW_"+ str(row) +" "+str(site_name)+" "+str(power_padding_x)+" "+str(row_y)
+        row_string= "ROW ROW_"+ str(row) +" "+str(site_name)+" "+str(int(power_padding_x))+" "+str(int(row_y))
         row_y+= float(site_height)
         if ((row%2)==0):
-            row_string+=" "+str(north)+" DO "+str(no_of_sites)+" BY "+ "1"+" STEP "+str(site_width)+" 0 ;"
+            row_string+=" "+str(north)+" DO "+str(no_of_sites)+" BY "+ "1"+" STEP "+str(int(site_width))+" 0 ;"
         else:
-            row_string+=" "+str(flipped_south)+" DO "+str(no_of_sites)+" BY "+ "1"+" STEP "+str(site_width)+" 0 ;"
+            row_string+=" "+str(flipped_south)+" DO "+str(no_of_sites)+" BY "+ "1"+" STEP "+str(int(site_width))+" 0 ;"
 
         print(row_string)
         file1.write(row_string +"\n")
@@ -462,12 +462,13 @@ site_height,site_width = get_site(site_width,site_height)
 site_height = float(site_height) *scale_unit
 site_width = float(site_width) *scale_unit
 #print (str(site_height) , str(site_width))
+Core_area,core_width,core_hight,no_of_sites,no_of_rows=  calculate_params(area,utalization,site_height,site_width)
 peremeter, die_width, die_height = calculate_total_die_peremeter()
-print ("DIEAREA (0 0) ( " + str(die_width) + " " + str(die_height) + " )"  )
-file1.write("DIEAREA (0 0) ( " + str(die_width) + " " + str(die_height) + " )"  )
+print ("DIEAREA (0 0) ( " + str(int(die_width)) + " " + str(int(die_height)) + " )"  )
+file1.write("DIEAREA (0 0) ( " + str(int(die_width)) + " " + str(int(die_height)) + " )" +"\n" )
 #print("Area= "+str(area))
 #file1.write( "Area= "+str(area) + "\n")
-Core_area,core_width,core_hight,no_of_sites,no_of_rows=  calculate_params(area,utalization,site_height,site_width)
+
 print ( "Core_area = " , Core_area)
 print ( Core_area,core_width,core_hight,no_of_sites,no_of_rows )
 get_rows()
